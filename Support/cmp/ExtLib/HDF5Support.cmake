@@ -106,7 +106,8 @@ endif()
     #set(CMAKE_MODULE_PATH ${HDF5_INSTALL}/share/cmake/hdf5 ${CMAKE_MODULE_PATH})
 #endif()
 
-find_package(HDF5 NAMES hdf5)
+# find_package(HDF5 NAMES hdf5)
+include(FindHDF5)
 if(HDF5_FOUND)
 
   GET_FILENAME_COMPONENT (HDF5_LIBRARY_DIRS "${HDF5_INCLUDE_DIR}" PATH)
@@ -115,6 +116,7 @@ if(HDF5_FOUND)
   # Add the library directory to the file that has all the search directories stored in it.
 
   include_directories(${HDF5_INCLUDE_DIRS} )
+  link_directories(${HDF5_LIBRARY_DIRS})
 
   message(STATUS "HDF5 Location: ${HDF5_INSTALL}")
   message(STATUS "HDF5 Version: ${HDF5_VERSION_STRING}")
@@ -127,7 +129,8 @@ if(HDF5_FOUND)
         set(BUILD_TYPES "Debug")
     endif()
   endif()
-  if(NOT APPLE)
+  # if(NOT APPLE)
+  if(WIN32)
     AddHDF5CopyInstallRules(LIBVAR HDF5_LIB
                         LIBNAME hdf5
                         TYPES ${BUILD_TYPES})
