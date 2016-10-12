@@ -46,6 +46,7 @@
 #endif
 
 #if SIMPL_USE_EIGEN
+#include <Eigen/Core>
 #include <Eigen/src/Core/util/Macros.h>
 #endif
 
